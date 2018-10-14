@@ -1,0 +1,60 @@
+@mixin atomicClassesNoBreakpoint ($attr, $cname, $cpost, $mod, $styles){
+  @each $style in $styles {
+    // if there is no breakpoint
+    @if length($style) == 1 {
+      @if(length(nth($style, 1)) == 1) {
+        @warn Problem with formatting of $attr
+      }
+
+      $vals: nth(nth($style, 1), 2);
+      @each $val in $vals {
+        @include atomicClass($cname, $cpost, $attr, $mod, $val);
+      }
+    }
+  }
+}
+
+@mixin atomicClassesWithBreakpoint ($attr, $cname, $cpost, $mod, $styles, $cbp) {
+  @each $style in $styles {
+    // if there is a breakpoint
+    @if length($style) > 1 {
+
+      @if(length(nth($style, 1)) == 1) {
+        @warn Problem with formatting of $attr
+      }
+
+      $vals: nth(nth($style, 1), 2);
+      $bp  : nth(nth($style, 2), 2);
+      $bp-name: nth(nth($bp, 1), 2);
+      $bp-cond: nth(nth($bp, 2), 2);
+      $cbp-name: nth(nth($cbp, 1), 2);
+      $post: $cpost + $bp-name;
+      // @warn #{$bp-name};
+      @if $cbp-name == $bp-name {
+        @media #{$bp-cond} {
+          @each $val in $vals {
+            @include atomicClass($cname, $post, $attr, $mod, $val);
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin atomicClass($className, $postfix, $attribute, $modifier, $val) {
+  $apiValue: nth($val, 1);
+  $value   : nth($val, 2);
+  .#{$className}#{$apiValue}#{$postfix}#{$modifier} {
+    #{$attribute}: #{$value};
+  }
+}
+
+@each $attr, $cname, $cpost, $mod, $styles in $atomic-config {
+  @include atomicClassesNoBreakpoint($attr, $cname, $cpost, $mod, $styles);
+}
+
+@each $bp in $breakpoint-order {
+  @each $attr, $cname, $cpost, $mod, $styles in $atomic-config {
+    @include atomicClassesWithBreakpoint($attr, $cname, $cpost, $mod, $styles, $bp);
+  }
+}
