@@ -28,14 +28,22 @@ app.set('views', './app/views');
 // Using Handlebars
 app.set('view engine', 'hbs');
 
+// Choose this or manually add the routes yourself
 // Loop through the app/controllers directory and add the routes
 // Make new files in the controllers directory and they will be added here
-fs.readdirSync('./app/controllers').forEach(function (file) {
-    if(file.substr(-3) == '.js') {
-        route = require('./app/controllers/' + file);
-        route.controller(app);
-    }
-});
+// fs.readdirSync('./app/controllers').forEach(function (file) {
+//     if(file.substr(-3) == '.js') {
+//         route = require('./app/controllers/' + file);
+//         route.controller(app);
+//     }
+// });
+
+// Manually add the routes yourself
+// Comment this out if you choose above
+indexRoute = require('./app/controllers/indexController');
+indexRoute.controller(app);
+usersRoute = require('./app/controllers/usersController');
+usersRoute.controller(app);
 
 // Add default 404 response
 app.use(function (req, res) {
