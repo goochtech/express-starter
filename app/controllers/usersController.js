@@ -8,7 +8,9 @@ module.exports.controller = function(app) {
 /**
  * a signup route
  */
-  app.post('/signup', function(req, res) {
+  app.post('/signup',
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(req, res) {
 
     const user = new userModel();
     user.username = req.body.username;
@@ -24,7 +26,9 @@ module.exports.controller = function(app) {
 /**
  * a users route to show users
  */
-  app.get('/users', function(req, res) {
+  app.get('/users',
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(req, res) {
 
     let locals = res.locals;
     locals.title = 'express-starter';

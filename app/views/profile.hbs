@@ -1,0 +1,21 @@
+<div class="mdl-grid">
+  <div class="mdl-cell--1-col"></div>
+  <div class="mdl-cell--10-col">
+    <div class="mdl-typography mdl-color-text--grey-800">
+        <h1 class="mdl-typography--display-3 mdl-color-text--grey-600">User Profile</h1>
+        <p>This page is to show you the users' data from the database and show that they are logged in. Feel free to remove it.</p>
+        {{#if user}}
+        <p>
+        ID: {{user.id}} <br/>
+        Username: {{user.username}}<br/>
+        Name: {{user.displayName}}<br/>
+        {{#if user.emails}}
+        {{# each user.emails}}Email: {{value}}<br/>{{/each}}
+        {{/if}}
+        </p>
+        <a href="/logout">Log out</a>
+        {{/if}}
+    </div>
+    <div class="mdl-cell--1-col"></div>
+  </div>
+</div>

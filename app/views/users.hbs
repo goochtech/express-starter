@@ -1,26 +1,28 @@
 <div class="mdl-grid">
-  <div class="mdl-cell--12-col">
-    <div class="mdl-typography mdl-color-text--grey-600">
-        <h1 class="mdl-typography--display-3">Users</h1>
-    </div>
-    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-    <thead>
-        <tr>
-            <th class="mdl-data-table__cell--non-numeric">username</th>
-            <th>realname</th>
-            <th>email</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each users}}
-        <tr>
-            <td class="mdl-data-table__cell--non-numeric">{{username}}</td>
-            <td>{{realname}}</td>
-            <td>{{email}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-    </table>
+    <div class="mdl-cell--1-col"></div>
+    <div class="mdl-cell--10-col">
+        <div class="mdl-typography mdl-color-text--grey-600">
+            <h1 class="mdl-typography--display-3">Users</h1>
+        </div>
+        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+        <thead>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric">username</th>
+                <th>realname</th>
+                <th>email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{username}}</td>
+                <td>{{realname}}</td>
+                <td>{{email}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+        </table>
 
-  </div>
+    </div>
+    <div class="mdl-cell--1-col"></div>
 </div>
