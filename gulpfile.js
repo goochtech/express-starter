@@ -22,9 +22,17 @@ gulp.task('sass', function(){
     .pipe(gulp.dest(paths.css));
 });
 
-gulp.task('default', ['sass'], function() {});
+// Main function
+gulp.task('default', gulp.series('sass', function(done) {
+    done();
+}));
 
-gulp.task('watch', function() {
+gulp.task('watch', function(done) {
     gulp.start('sass');
     gulp.watch(paths.sass, ['sass']);
+    done();
 });
+
+function done() {
+    console.log('all done here');
+}
